@@ -1,6 +1,6 @@
 ;;; erc-scrolltoplace.el --- An Erc module to scroll to bottom better -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2016-2017 Jay Kamat
+;; Copyright (C) 2017 Jay Kamat
 ;; Author: Jay Kamat <jaygkamat@gmail.com>
 ;; Version: 0.0.1
 ;; Keywords: erc, module, scrolltobottom

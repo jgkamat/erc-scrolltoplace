@@ -1,11 +1,10 @@
+
 #+AUTHOR: Jay Kamat
 #+EMAIL: jaygkamat@gmail.com
 
 * Erc ScrollToPlace
 
 An erc module to try to emulate 'scrolltobottom' while keep-place is activated.
-
-This is very beta, so please don't use it right now!
 
 * Overview
 
@@ -29,14 +28,22 @@ This module does not touch point at all, so once your screen fills with
 messages, you won't see new ones, since doing so would require moving
 point.
 
+* Installation
+
+First install [[https://github.com/10sr/switch-buffer-functions-el][switch-buffer-functions]], then:
+
+#+BEGIN_SRC emacs-lisp
+  (require 'scrolltoplace)
+  (add-to-list 'erc-modules 'scrolltoplace)
+  (erc-update-modules)
+#+END_SRC
+
+And enjoy!
+
 * Contributing
 
-Please submit issues as you find them. Pull requests are welcome!
-
-** Bugs
-
-- scrolltoplace does not re-scroll when switching workspaces in
-  eyebrowse. Implementing this is probably more of an issue for eyebrowse than scrolltoplace.
+Please submit issues as you find them. Pull requests are welcome! This is a very
+small module, so it isn't too hard.
 
 * License
 
