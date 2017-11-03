@@ -3,9 +3,9 @@
 ;; Copyright (C) 2017 Jay Kamat
 ;; Author: Jay Kamat <jaygkamat@gmail.com>
 ;; Version: 0.0.1
-;; Keywords: erc, module, scrolltobottom
+;; Keywords: erc, module, comm, scrolltobottom, keep-place
 ;; URL: http://github.com/jgkamat/erc-scrolltoplace
-;; Package-Requires: ((emacs "24.0") (switch-buffer-functions))
+;; Package-Requires: ((emacs "24.0") (switch-buffer-functions "0.0.1"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
