@@ -58,8 +58,7 @@
   ;; (Fran Litterio, 2003/01/07)
   (let ((resize-mini-windows nil))
     ;; Only run if current buffer is visible
-    (when (or (eq (current-buffer) (window-buffer (selected-window)))
-              (get-buffer-window (current-buffer)))
+    (when (eq (current-buffer) (window-buffer (selected-window)))
       (save-restriction
         (widen)
         (save-excursion
