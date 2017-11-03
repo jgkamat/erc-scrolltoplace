@@ -2,7 +2,8 @@
 #+AUTHOR: Jay Kamat
 #+EMAIL: jaygkamat@gmail.com
 
-* Erc ScrollToPlace
+* DONE Erc ScrollToPlace
+CLOSED: [2017-11-03 Fri 00:38]
 
 An erc module to try to emulate 'scrolltobottom' while keep-place is activated.
 
@@ -28,7 +29,10 @@ This module does not touch point at all, so once your screen fills with
 messages, you won't see new ones, since doing so would require moving
 point.
 
-* Installation
+If this annoys you, you could add a function hook to move point to point-max
+whenever switching away from an erc buffer.
+
+* TODO Installation
 
 First install [[https://github.com/10sr/switch-buffer-functions-el][switch-buffer-functions]], then:
 
@@ -42,8 +46,10 @@ And enjoy!
 
 * Contributing
 
-Please submit issues as you find them. Pull requests are welcome! This is a very
-small module, so it isn't too hard.
+Please submit issues or feature requests to this repo. Pull requests are
+welcome! This is a very small module, so it isn't too hard.
+
+Please let me know if you have any comments.
 
 * License
 
