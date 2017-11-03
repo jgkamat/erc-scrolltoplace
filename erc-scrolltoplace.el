@@ -21,17 +21,20 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; TODO provide commentary
+;; erc-scrolltoplace provices an erc module called 'scrolltoplace' which
+;; tries to keep as many messages visible as possible in ERC while never moving
+;; point.
 ;;
-;; Variables:
+;; Add erc-scrolltoplace to `erc-modules' and run `erc-update-modules' to enable this!
 
 ;;; Constants:
 
 ;;; Code:
-
+;;;; Dependencies:
 (require 'erc)
 (require 'switch-buffer-functions)
 
+;;;; Module Definition:
 (define-erc-module scrolltoplace nil
   "Leave point above un-viewed text in other channels."
   ((add-hook 'erc-insert-post-hook 'erc-scroll-to-place)
@@ -39,6 +42,7 @@
   ((remove-hook 'erc-insert-post-hook 'erc-scroll-to-place)
    (remove-hook 'switch-buffer-functions 'erc--scroll-to-place-check-erc)))
 
+;;;; Functions:
 (defun erc--scroll-to-place-check-erc (_from _to)
   "Run `erc-scroll-to-place' if we are switching to an erc buffer."
   (when (eq major-mode 'erc-mode)
@@ -62,6 +66,7 @@
           (goto-char (point-max))
           (recenter-top-bottom -1))))))
 
+;;;; Footer:
 (provide 'erc-scrolltoplace)
 
 ;;; erc-scrolltoplace.el ends here
