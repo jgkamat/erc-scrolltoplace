@@ -33,6 +33,7 @@
 ;;;; Dependencies:
 (require 'erc)
 (require 'switch-buffer-functions)
+(require 'subr-x)
 
 ;;;; Module Definition:
 (define-erc-module scrolltoplace nil
@@ -58,12 +59,16 @@
   ;; (Fran Litterio, 2003/01/07)
   (let ((resize-mini-windows nil))
     ;; Only run if current buffer is visible
-    (when (eq (current-buffer) (window-buffer (selected-window)))
+    (when-let* ((cur-window (get-buffer-window (current-buffer))))
       (save-restriction
         (widen)
-        (save-excursion
-          (goto-char (point-max))
-          (recenter-top-bottom -1))))))
+        ;; If window is visible but not focused, run as if we are there
+        (with-selected-window cur-window
+          ;; Go to bottom, recenter to bottom is available, then restore point,
+          ;; so we have to see it
+          (save-excursion
+            (goto-char (point-max))
+            (recenter -1)))))))
 
 ;;;; Footer:
 (provide 'erc-scrolltoplace)
