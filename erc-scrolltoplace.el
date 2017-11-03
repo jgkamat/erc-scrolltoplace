@@ -30,45 +30,37 @@
 ;;; Code:
 
 (require 'erc)
+(require 'switch-buffer-functions)
 
 (define-erc-module scrolltoplace nil
-  "This mode causes the prompt to stay at the end of the window."
-  ((add-hook 'erc-mode-hook 'erc-add-scroll-to-place)
-   (dolist (buffer (erc-buffer-list))
-     (with-current-buffer buffer
-       (erc-add-scroll-to-place))))
-  ((remove-hook 'erc-mode-hook 'erc-add-scroll-to-place)
-   (dolist (buffer (erc-buffer-list))
-     (with-current-buffer buffer
-       (remove-hook 'post-command-hook 'erc-scroll-to-place t)))))
+  "Leave point above un-viewed text in other channels."
+  ((add-hook 'erc-insert-post-hook 'erc-scroll-to-place)
+   (add-hook 'switch-buffer-functions 'erc--scroll-to-place-check-erc))
+  ((remove-hook 'erc-insert-post-hook 'erc-scroll-to-place)
+   (remove-hook 'switch-buffer-functions 'erc--scroll-to-place-check-erc)))
 
-(defun erc-add-scroll-to-place ()
-  "A hook function for `erc-mode-hook' to recenter output at a 'good place'.
-If you find that ERC hangs when using this function, try customizing
-the value of `erc-input-line-position'.
-This works whenever scrolling happens, so it's added to
-`window-scroll-functions' rather than `erc-insert-post-hook'."
-  (add-hook 'post-command-hook 'erc-scroll-to-place nil t))
+(defun erc--scroll-to-place-check-erc (_from _to)
+  "Run `erc-scroll-to-place' if we are switching to an erc buffer."
+  (when (eq major-mode 'erc-mode)
+    (erc-scroll-to-place)))
 
 (defun erc-scroll-to-place ()
-  "Recenter WINDOW so that `point' is on the last line.
-This is added to `window-scroll-functions' by `erc-add-scroll-to-place'.
-You can control which line is recentered to by customizing the
-variable `erc-input-line-position'."
-      ;; Temporarily bind resize-mini-windows to nil so that users who have it
-      ;; set to a non-nil value will not suffer from premature minibuffer
-      ;; shrinkage due to the below recenter call.  I have no idea why this
-      ;; works, but it solves the problem, and has no negative side effects.
-      ;; (Fran Litterio, 2003/01/07)
+  "Recenter WINDOW so that `point' is visible, but we can see as much conversation as possible."
+
+  ;; Temporarily bind resize-mini-windows to nil so that users who have it
+  ;; set to a non-nil value will not suffer from premature minibuffer
+  ;; shrinkage due to the below recenter call.  I have no idea why this
+  ;; works, but it solves the problem, and has no negative side effects.
+  ;; (Fran Litterio, 2003/01/07)
   (let ((resize-mini-windows nil))
-    (save-restriction
-      (widen)
-      (when (and erc-insert-marker
-		 ;; we're editing a line. Scroll.
-		 (> (point) erc-insert-marker))
-	(save-excursion
-	  (goto-char (point-max))
-	  (recenter (or erc-input-line-position -1)))))))
+    ;; Only run if current buffer is visible
+    (when (or (eq (current-buffer) (window-buffer (selected-window)))
+              (get-buffer-window (current-buffer)))
+      (save-restriction
+        (widen)
+        (save-excursion
+          (goto-char (point-max))
+          (recenter-top-bottom -1))))))
 
 (provide 'erc-scrolltoplace)
 
