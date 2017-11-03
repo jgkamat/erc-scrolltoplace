@@ -1,0 +1,13 @@
+#+TITLE: Erc ScrollToPlace
+#+AUTHOR: Jay Kamat
+#+EMAIL: jaygkamat@gmail.com
+
+* Erc ScrollToPlace
+
+An erc module to try to emulate 'scrolltobottom' while keep-place is activated.
+
+This is very beta, so please don't use it right now!
+
+* License
+
+erc-scrolltoplace is licensed under the GPLv3.
