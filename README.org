@@ -2,7 +2,7 @@
 #+AUTHOR: Jay Kamat
 #+EMAIL: jaygkamat@gmail.com
 
-* DONE Erc ScrollToPlace
+* DONE Erc ScrollToPlace [[http://melpa.milkbox.net/#/erc-scrolltoplace][file:http://melpa.milkbox.net/packages/erc-scrolltoplace-badge.svg]]
 CLOSED: [2017-11-03 Fri 00:38]
 
 An erc module to try to emulate 'scrolltobottom' while keep-place is activated.
@@ -32,9 +32,16 @@ point.
 If this annoys you, you could add a function hook to move point to point-max
 whenever switching away from an erc buffer.
 
-* TODO Installation
+* DONE Installation
+CLOSED: [2017-11-04 Sat 12:32]
 
-First install [[https://github.com/10sr/switch-buffer-functions-el][switch-buffer-functions]], then:
+With Melpa:
+
+#+BEGIN_EXAMPLE
+M-x package-install erc-scrolltoplace
+#+END_EXAMPLE
+
+and add this to init:
 
 #+BEGIN_SRC emacs-lisp
   (require 'scrolltoplace)
