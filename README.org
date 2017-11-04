@@ -44,7 +44,7 @@ M-x package-install erc-scrolltoplace
 and add this to init:
 
 #+BEGIN_SRC emacs-lisp
-  (require 'scrolltoplace)
+  (require 'erc-scrolltoplace)
   (add-to-list 'erc-modules 'scrolltoplace)
   (erc-update-modules)
 #+END_SRC

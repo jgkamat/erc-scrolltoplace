@@ -29,7 +29,7 @@
 ;; still seeing newer messages as they come in.
 ;;
 ;; Add the following to your init to enable erc-scrolltoplace:
-;; (require 'scrolltoplace)
+;; (require 'erc-scrolltoplace)
 ;; (add-to-list 'erc-modules 'scrolltoplace)
 ;; (erc-update-modules)
 
