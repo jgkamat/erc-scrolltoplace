@@ -1,4 +1,4 @@
-
+* This repository has moved to https://gitlab.com/jgkamat/erc-scrolltoplace
 #+AUTHOR: Jay Kamat
 #+EMAIL: jaygkamat@gmail.com
 
